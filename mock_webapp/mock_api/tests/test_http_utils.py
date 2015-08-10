@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 import json
+
 from django.test import TestCase
+from mock import patch
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.test import APIRequestFactory
+
 from mock_api.http_utils import get_request_headers, get_response_headers, get_user_agent, get_query_string, \
-    log_request_and_response
+    log_request_and_response, make_request
 
 
 class HttpUtilsTest(TestCase):
@@ -79,3 +82,14 @@ class HttpUtilsTest(TestCase):
         self.assertEqual(access_log.response_status_code, response.status_code)
         self.assertIn("API_LOG_OK", access_log.response_content)
         self.assertIn("X-TEST", access_log.response_headers)
+
+    @patch("requests.request")
+    def test_make_api_callback_request(self, mocked_method):
+        url = "http://www.google.com"
+        method = "GET"
+        params = '{"q": "test"}'
+        headers = '{"X-TEST": "TEST"}'
+
+        make_request(method=method, url=url, params=params, headers=headers)
+
+        mocked_method.assert_called_once_with(method, url, params=params, headers=headers)

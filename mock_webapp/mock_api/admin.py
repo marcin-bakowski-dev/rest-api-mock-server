@@ -1,5 +1,6 @@
 from django.contrib import admin
-from mock_api.forms import ApiResponseForm, ApiResponseRuleForm, ApiEndpointForm
+
+from mock_api.forms import ApiResponseForm, ApiResponseRuleForm, ApiEndpointForm, ApiCallbackForm
 from mock_api.models import ApiEndpoint, AccessLog, ApiResponse, ApiResponseRule, ApiCallback
 
 
@@ -17,6 +18,11 @@ class ApiEndpointAdmin(admin.ModelAdmin):
     list_display = ('method', 'path', 'response')
 
 
+class ApiCallbackAdmin(admin.ModelAdmin):
+    form = ApiCallbackForm
+    list_display = ('name', 'url', 'method')
+
+
 class AccessLogAdmin(admin.ModelAdmin):
     list_display = ('request_time', 'user_agent', 'request_method', 'path', 'response_status_code')
     readonly_fields = ('request_time', 'user_agent', 'request_method', 'path', 'request_headers',
@@ -29,6 +35,6 @@ class AccessLogAdmin(admin.ModelAdmin):
 
 admin.site.register(ApiResponse, ApiResponseAdmin)
 admin.site.register(ApiResponseRule, ApiResponseRuleAdmin)
-admin.site.register(ApiCallback)
+admin.site.register(ApiCallback, ApiCallbackAdmin)
 admin.site.register(ApiEndpoint, ApiEndpointAdmin)
 admin.site.register(AccessLog, AccessLogAdmin)

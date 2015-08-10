@@ -1,7 +1,14 @@
 # -*- coding: utf-8 -*-
 import json
+import logging
+
 import re
+import requests
+from requests.exceptions import RequestException
+
 from mock_api.models import AccessLog
+
+logger = logging.getLogger(__name__)
 
 REGEX_HTTP = re.compile(r'^HTTP_.+$')
 REGEX_CONTENT_TYPE = re.compile(r'^CONTENT_TYPE$')
@@ -43,3 +50,10 @@ def log_request_and_response(request, response):
                                         response_status_code=response.status_code,
                                         response_headers=json.dumps(get_response_headers(response)),
                                         response_content=json.dumps(response.data))
+
+
+def make_request(method, url, params=None, headers=None):
+    try:
+        return requests.request(method, url, params=params, headers=headers)
+    except RequestException as e:
+        logger.exception(e)

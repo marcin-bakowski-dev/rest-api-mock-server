@@ -14,7 +14,7 @@ class ApiResponse(models.Model):
         return u"ApiResponse: {}[{}]".format(self.name, self.status_code)
 
     def get_content(self):
-        return json.loads(self.content) if self.content else None
+        return _deserialize_or_none(self.content)
 
 
 class ApiResponseRule(models.Model):
@@ -31,9 +31,18 @@ class ApiResponseRule(models.Model):
 class ApiCallback(models.Model):
     name = models.CharField(max_length=50)
     url = models.URLField()
+    method = models.CharField(max_length=10)
+    params = models.TextField(blank=True, default="")
+    headers = models.TextField(blank=True, default="")
 
     def __unicode__(self):
-        return u"ApiCallback: {}: {}".format(self.name, self.url)
+        return u"ApiCallback: {}: {} {}".format(self.name, self.method, self.url)
+
+    def get_params(self):
+        return _deserialize_or_none(self.params)
+
+    def get_headers(self):
+        return _deserialize_or_none(self.headers)
 
 
 class ApiEndpoint(models.Model):
@@ -66,3 +75,7 @@ class AccessLog(models.Model):
 
     def __unicode__(self):
         return u"[{}]: {} [{}] {}".format(self.request_time, self.request_method, self.response_status_code, self.path)
+
+
+def _deserialize_or_none(value):
+    return json.loads(value) if value else None

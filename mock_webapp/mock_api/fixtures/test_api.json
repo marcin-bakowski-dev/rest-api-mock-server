@@ -30,12 +30,25 @@
   },
   {
     "fields": {
+        "url": "http://www.google.com",
+        "headers": "{\"X-TEST\":\"TEST\"}",
+        "params": "{\"q\":\"test\"}",
+        "name": "google.com",
+        "method": "GET"
+    },
+    "model": "mock_api.apicallback",
+    "pk": 1
+  },
+  {
+    "fields": {
       "path": "/api/items/",
       "response_rules": [
         1
       ],
       "method": "GET",
-      "callbacks": [],
+      "callbacks": [
+            1
+        ],
       "response": 1
     },
     "model": "mock_api.apiendpoint",
