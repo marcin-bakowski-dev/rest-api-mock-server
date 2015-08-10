@@ -1,50 +1,82 @@
 # -*- coding: utf-8 -*-
 from django.test import TestCase
-from mock_api.forms import ApiEndpointForm
+
+from mock_api.forms import ApiResponseForm, ApiEndpointForm, ApiResponseRuleForm
 
 
-class ApiEndpointFormTest(TestCase):
-    DATA = {"path": "/api/test",
-            "method": "GET",
-            "status_code": 200,
-            "response": '{"test": "case"}'}
+class BaseFormTest(object):
 
     def data(self, **kwargs):
         form_data = {}
         form_data.update(self.DATA, **kwargs)
         return form_data
 
-    def assert_api_endpoint_form_is_not_valid(self, data, error_field):
-        form = ApiEndpointForm(data=data)
+    def assert_form_is_not_valid(self, data, error_field):
+        form = self.form_cls(data=data)
 
         self.assertFalse(form.is_valid())
         self.assertIn(error_field, form.errors)
 
-    def assert_api_endpoint_form_is_valid(self, data):
-        form = ApiEndpointForm(data=data)
+    def assert_form_is_valid(self, data):
+        form = self.form_cls(data=data)
 
         self.assertTrue(form.is_valid())
 
-    def test_empty_path(self):
-        self.assert_api_endpoint_form_is_not_valid(self.data(path=""), "path")
 
-    def test_empty_method(self):
-        self.assert_api_endpoint_form_is_not_valid(self.data(method=""), "method")
+class ApiResponseFormTest(BaseFormTest, TestCase):
 
-    def test_invalid_method(self):
-        self.assert_api_endpoint_form_is_not_valid(self.data(method="INVALID"), "method")
+    DATA = {"name": "Default OK",
+            "status_code": 200,
+            "response": '{"test": "case"}'}
+    form_cls = ApiResponseForm
 
     def test_empty_status_code(self):
-        self.assert_api_endpoint_form_is_not_valid(self.data(status_code=""), "status_code")
+        self.assert_form_is_not_valid(self.data(status_code=""), "status_code")
 
     def test_invalid_status_code(self):
-        self.assert_api_endpoint_form_is_not_valid(self.data(status_code="INVALID"), "status_code")
+        self.assert_form_is_not_valid(self.data(status_code="INVALID"), "status_code")
 
     def test_invalid_response(self):
-        self.assert_api_endpoint_form_is_not_valid(self.data(response="{INVALID"), "response")
+        self.assert_form_is_not_valid(self.data(content="{INVALID"), "content")
 
     def test_valid_form(self):
-        self.assert_api_endpoint_form_is_valid(self.data())
+        self.assert_form_is_valid(self.data())
 
-    def test_valid_form_with_empty_response(self):
-        self.assert_api_endpoint_form_is_valid(self.data())
+
+class ApiEndpointFormTest(BaseFormTest, TestCase):
+
+    DATA = {"path": "/api/test",
+            "method": "GET",
+            "response": 1,
+            "response_rules": [1]}
+    form_cls = ApiEndpointForm
+    fixtures = ('test_api.json',)
+
+    def test_empty_path(self):
+        self.assert_form_is_not_valid(self.data(path=""), "path")
+
+    def test_empty_method(self):
+        self.assert_form_is_not_valid(self.data(method=""), "method")
+
+    def test_invalid_method(self):
+        self.assert_form_is_not_valid(self.data(method="INVALID"), "method")
+
+    def test_valid_form(self):
+        self.assert_form_is_valid(self.data())
+
+
+class ApiResponseRuleFormTest(BaseFormTest, TestCase):
+
+    DATA = {"name": "response rule name",
+            "response": "1",
+            "rule": "PARAM_CONTAINS_VALUE",
+            "param_name": "test",
+            "param_value": "not_found"}
+    form_cls = ApiResponseRuleForm
+    fixtures = ('test_api.json',)
+
+    def test_form_invalid_rule(self):
+        self.assert_form_is_not_valid(self.data(rule="INVALID"), "rule")
+
+    def test_form_is_valid(self):
+        self.assert_form_is_valid(self.data())

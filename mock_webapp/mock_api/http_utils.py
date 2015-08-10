@@ -38,7 +38,7 @@ def log_request_and_response(request, response):
                                         user_agent=get_user_agent(request),
                                         request_method=request.method,
                                         request_headers=json.dumps(get_request_headers(request)),
-                                        request_query_params=get_query_string(request),
+                                        request_query_string=get_query_string(request),
                                         request_data=json.dumps(request.data),
                                         response_status_code=response.status_code,
                                         response_headers=json.dumps(get_response_headers(response)),

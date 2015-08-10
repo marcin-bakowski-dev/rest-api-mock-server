@@ -73,7 +73,7 @@ class HttpUtilsTest(TestCase):
         self.assertEqual(access_log.user_agent, http_user_agent)
         self.assertEqual(access_log.path, request.path_info)
         self.assertEqual(access_log.request_method, "POST")
-        self.assertEqual(access_log.request_query_params, "test_qs")
+        self.assertEqual(access_log.request_query_string, "test_qs")
         self.assertIn(http_user_agent, access_log.request_headers)
         self.assertIn("ABC", access_log.request_data)
         self.assertEqual(access_log.response_status_code, response.status_code)

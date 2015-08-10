@@ -1,0 +1,99 @@
+[
+  {
+    "fields": {
+      "content": "{\"status\":\"OK\"}",
+      "status_code": 200,
+      "name": "api items response"
+    },
+    "model": "mock_api.apiresponse",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "content": "{\"status\": \"not found\"}",
+      "status_code": 404,
+      "name": "Generic 404 response"
+    },
+    "model": "mock_api.apiresponse",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "param_name": "test",
+      "param_value": "not_found",
+      "name": "Not found rule",
+      "rule": "PARAM_CONTAINS_VALUE",
+      "response": 2
+    },
+    "model": "mock_api.apiresponserule",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "path": "/api/items/",
+      "response_rules": [
+        1
+      ],
+      "method": "GET",
+      "callbacks": [],
+      "response": 1
+    },
+    "model": "mock_api.apiendpoint",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "path": "/api/items/",
+      "method": "POST",
+      "response_rules": [],
+      "callbacks": [],
+      "response": 1
+    },
+    "model": "mock_api.apiendpoint",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "path": "/api/items/",
+      "method": "PUT",
+      "response_rules": [],
+      "callbacks": [],
+      "response": 1
+    },
+    "model": "mock_api.apiendpoint",
+    "pk": 3
+  },
+  {
+    "fields": {
+      "path": "/api/items/",
+      "method": "PATCH",
+      "response_rules": [],
+      "callbacks": [],
+      "response": 1
+    },
+    "model": "mock_api.apiendpoint",
+    "pk": 4
+  },
+  {
+    "fields": {
+      "path": "/api/items/",
+      "method": "DELETE",
+      "response_rules": [],
+      "callbacks": [],
+      "response": 1
+    },
+    "model": "mock_api.apiendpoint",
+    "pk": 5
+  },
+  {
+    "fields": {
+      "path": "/api/items/",
+      "method": "OPTIONS",
+      "response_rules": [],
+      "callbacks": [],
+      "response": 1
+    },
+    "model": "mock_api.apiendpoint",
+    "pk": 6
+  }
+]

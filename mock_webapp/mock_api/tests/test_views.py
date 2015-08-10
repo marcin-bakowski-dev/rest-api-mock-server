@@ -7,7 +7,7 @@ from mock_api.models import ApiEndpoint
 
 
 class MockApiViewTest(APITestCase):
-    fixtures = ('test_apiendpoints.json',)
+    fixtures = ('test_api.json',)
     PATH = '/api/items/'
 
     def test_undefined_path(self):
@@ -24,8 +24,8 @@ class MockApiViewTest(APITestCase):
 
         response = method_handler(method)(self.PATH, **kwargs)
 
-        self.assertEqual(response.status_code, api_endpoint.status_code)
-        self.assertEqual(response.content.decode(encoding="UTF-8"), api_endpoint.response)
+        self.assertEqual(response.status_code, api_endpoint.response.status_code)
+        self.assertEqual(response.content.decode(encoding="UTF-8"), api_endpoint.response.content)
 
     def test_get_request(self):
         self.assert_api_endpoint_response(self.PATH, "GET")
