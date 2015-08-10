@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='AccessLog',
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, verbose_name='ID', auto_created=True)),
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
                 ('request_time', models.TimeField(auto_now_add=True)),
                 ('user_agent', models.CharField(max_length=254, blank=True, default='')),
                 ('path', models.CharField(max_length=254)),
@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ApiCallback',
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, verbose_name='ID', auto_created=True)),
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
                 ('name', models.CharField(max_length=50)),
                 ('url', models.URLField()),
                 ('method', models.CharField(max_length=10)),
@@ -40,16 +40,16 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ApiEndpoint',
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, verbose_name='ID', auto_created=True)),
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
                 ('path', models.CharField(max_length=254)),
                 ('method', models.CharField(max_length=10)),
-                ('callbacks', models.ManyToManyField(to='mock_api.ApiCallback', blank=True)),
+                ('callbacks', models.ManyToManyField(blank=True, to='mock_api.ApiCallback')),
             ],
         ),
         migrations.CreateModel(
             name='ApiResponse',
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, verbose_name='ID', auto_created=True)),
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
                 ('name', models.CharField(max_length=100)),
                 ('status_code', models.IntegerField()),
                 ('content', models.TextField(blank=True, default='')),
@@ -58,7 +58,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ApiResponseRule',
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, verbose_name='ID', auto_created=True)),
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
                 ('name', models.CharField(max_length=100)),
                 ('rule', models.CharField(max_length=50)),
                 ('param_name', models.CharField(max_length=100, blank=True, default='')),
@@ -74,6 +74,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='apiendpoint',
             name='response_rules',
-            field=models.ManyToManyField(to='mock_api.ApiResponseRule', blank=True),
+            field=models.ManyToManyField(blank=True, to='mock_api.ApiResponseRule'),
+        ),
+        migrations.AddField(
+            model_name='accesslog',
+            name='api_endpoint',
+            field=models.ForeignKey(to='mock_api.ApiEndpoint', null=True, blank=True),
         ),
     ]

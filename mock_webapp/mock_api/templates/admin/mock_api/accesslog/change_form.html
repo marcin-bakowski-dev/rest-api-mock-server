@@ -1,0 +1,11 @@
+{% extends "admin/change_form.html" %}
+{% load i18n admin_urls admin_static admin_modify %}
+
+{% block object-tools-items %}
+{{block.super}}
+{% if original.api_endpoint %}
+<li>
+    <a href="{% url 'admin:run_api_endpoint_callback' original.pk %}">{% trans "Re-run api endpoint callbacks" %}</a>
+</li>
+{% endif %}
+{% endblock %}

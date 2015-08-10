@@ -70,6 +70,7 @@ class AccessLog(models.Model):
     response_status_code = models.IntegerField()
     response_headers = models.TextField(blank=True, default="")
     response_content = models.TextField(blank=True, default="")
+    api_endpoint = models.ForeignKey(ApiEndpoint, blank=True, null=True)
 
     ordering = ('-request_time',)
 
