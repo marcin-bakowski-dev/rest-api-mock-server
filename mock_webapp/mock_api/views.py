@@ -7,7 +7,7 @@ from rest_framework import status
 
 from mock_api import callbacks
 from mock_api.authentication import MockNoAuthentication
-from mock_api.http_utils import log_request_and_response
+from mock_api import http_utils
 from mock_api.models import ApiEndpoint
 from mock_api.response_rules.errors import MatchingResponseNotFound
 from mock_api.response_rules.resolvers import ResponseResolver
@@ -41,7 +41,7 @@ class MockApiView(APIView):
     def finalize_response(self, request, response, *args, **kwargs):
         response = super(MockApiView, self).finalize_response(request, response, *args, **kwargs)
 
-        access_log = log_request_and_response(request, response)
+        access_log = http_utils.log_request_and_response(request, response)
         if self.api_endpoint:
             access_log.api_endpoint = self.api_endpoint
             access_log.save()

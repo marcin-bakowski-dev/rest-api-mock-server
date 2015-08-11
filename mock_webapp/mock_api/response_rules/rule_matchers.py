@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
-from mock_api.response_rules.errors import MatchingResponseRuleNotFound
 
 
 class BaseRuleMatcher(object):
 
-    def __init__(self, rule, param_name, param_value):
-        self.rule = rule
+    def __init__(self, param_name, param_value):
         self.param_name = param_name
         self.param_value = param_value
 
@@ -13,26 +11,49 @@ class BaseRuleMatcher(object):
         raise NotImplementedError
 
     @classmethod
-    def get_rules(cls):
+    def rule_name(cls):
         raise NotImplementedError
 
 
-class RequestParamMatcher(BaseRuleMatcher):
-    COMPARATORS = {
-        'PARAM_EXISTS': lambda data, name, value: name in data,
-        'PARAM_CONTAINS_VALUE': lambda data, name, value: data.get(name) and value in data.get(name),
-        'PARAM_NOT_CONTAINS_VALUE': lambda data, name, value: value not in data.get(name),
-    }
+class RequestParamExistsMatcher(BaseRuleMatcher):
+    RULE = 'PARAM_EXISTS'
 
     @classmethod
-    def get_rules(cls):
-        return cls.COMPARATORS.keys()
+    def rule_name(cls):
+        return cls.RULE
 
     def match(self, request):
-        comparator = self.COMPARATORS.get(self.rule)
-        if comparator:
-            return comparator(data=request.query_params if request.method == 'GET' else request.data,
-                              name=self.param_name,
-                              value=self.param_value)
-        else:
-            raise MatchingResponseRuleNotFound("No ResponseRule class for rule: {}".format(self.rule))
+        data = _request_data(request)
+        return self.param_name in data
+
+
+class RequestParamContainsValueMatcher(BaseRuleMatcher):
+    RULE = 'PARAM_CONTAINS_VALUE'
+
+    @classmethod
+    def rule_name(cls):
+        return cls.RULE
+
+    def match(self, request):
+        data = _request_data(request)
+        return _data_contains_value(data, self.param_name, self.param_value)
+
+
+class RequestParamNotContainsValueMatcher(BaseRuleMatcher):
+    RULE = 'PARAM_NOT_CONTAINS_VALUE'
+
+    @classmethod
+    def rule_name(cls):
+        return cls.RULE
+
+    def match(self, request):
+        data = _request_data(request)
+        return not _data_contains_value(data, self.param_name, self.param_value)
+
+
+def _data_contains_value(data, key, value):
+    return value in data.get(key) if data.get(key) else False
+
+
+def _request_data(request):
+    return request.query_params if request.method == 'GET' else request.data
