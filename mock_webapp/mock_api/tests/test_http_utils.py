@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import json
+from django.conf import settings
 
 from django.test import TestCase
 from mock import patch
@@ -90,6 +91,8 @@ class HttpUtilsTest(TestCase):
         params = '{"q": "test"}'
         headers = '{"X-TEST": "TEST"}'
 
-        make_request(method=method, url=url, params=params, headers=headers)
+        make_request(method=method, url=url, params=params, headers=headers,
+                     timeout=settings.DEFAULT_CALLBACK_REQUEST_TIMEOUT)
 
-        mocked_method.assert_called_once_with(method, url, params=params, headers=headers)
+        mocked_method.assert_called_once_with(method, url, params=params, headers=headers,
+                                              timeout=settings.DEFAULT_CALLBACK_REQUEST_TIMEOUT)

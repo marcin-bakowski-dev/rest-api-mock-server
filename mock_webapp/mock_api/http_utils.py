@@ -52,8 +52,8 @@ def log_request_and_response(request, response):
                                         response_content=json.dumps(response.data))
 
 
-def make_request(method, url, params=None, headers=None):
+def make_request(method, url, params=None, headers=None, timeout=None):
     try:
-        return requests.request(method, url, params=params, headers=headers)
+        return requests.request(method, url, params=params, headers=headers, timeout=timeout)
     except RequestException as e:
         logger.exception(e)

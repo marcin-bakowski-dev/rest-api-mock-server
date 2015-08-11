@@ -89,7 +89,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Warsaw'
 
 USE_I18N = True
 
@@ -126,3 +126,6 @@ LOGGING = {
         },
     },
 }
+
+# request timeout
+DEFAULT_CALLBACK_REQUEST_TIMEOUT = 3
