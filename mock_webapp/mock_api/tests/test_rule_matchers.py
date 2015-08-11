@@ -7,7 +7,8 @@ from mock_api.response_rules import RequestParamExistsMatcher, RequestParamConta
     RequestParamNotContainsValueMatcher
 
 
-class AbstractRequestParamMatcher(object):
+# noinspection PyCallingNonCallable
+class AbstractRequestParamMatcher(TestCase):
     factory = APIRequestFactory()
     matcher_cls = None
 
@@ -21,7 +22,7 @@ class AbstractRequestParamMatcher(object):
         self.assertEqual(match, expected)
 
 
-class RequestParamExistsMatcherTest(AbstractRequestParamMatcher, TestCase):
+class RequestParamExistsMatcherTest(AbstractRequestParamMatcher):
     matcher_cls = RequestParamExistsMatcher
 
     def test_get_request_param_exists_return_true(self):
@@ -37,7 +38,7 @@ class RequestParamExistsMatcherTest(AbstractRequestParamMatcher, TestCase):
         self.assert_request_param_matcher("POST", None, "test_param", "test_value", False)
 
 
-class RequestParamContainsValueMatcherTest(AbstractRequestParamMatcher, TestCase):
+class RequestParamContainsValueMatcherTest(AbstractRequestParamMatcher):
     matcher_cls = RequestParamContainsValueMatcher
 
     def test_get_request_param_contains_value_return_true(self):
@@ -56,7 +57,7 @@ class RequestParamContainsValueMatcherTest(AbstractRequestParamMatcher, TestCase
         self.assert_request_param_matcher("POST", {"test_param": "123"}, "test_param", "test_value", False)
 
 
-class RequestParamNotContainsValueMatcherTest(AbstractRequestParamMatcher, TestCase):
+class RequestParamNotContainsValueMatcherTest(AbstractRequestParamMatcher):
     matcher_cls = RequestParamNotContainsValueMatcher
 
     def test_get_request_param_not_contains_value_return_false(self):

@@ -7,7 +7,7 @@ from rest_framework import status
 from mock_api.models import ApiEndpoint, ApiResponseRule, ApiResponse, ApiCallback
 from mock_api.response_rules import response_rules_provider
 
-HTTP_ALLOWED_METHODS = ('GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS')
+HTTP_ALLOWED_METHODS = ('GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS')
 HTTP_STATUS_CODES = ((getattr(status, c), c) for c in dir(status) if c.startswith("HTTP_"))
 
 

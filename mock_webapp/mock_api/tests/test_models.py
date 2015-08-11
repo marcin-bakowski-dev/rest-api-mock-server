@@ -5,7 +5,7 @@ from mock_api.models import ApiResponse, ApiCallback
 
 
 class ApiModelMixin(object):
-    INSTANCE_DATA = None
+    INSTANCE_DATA = {}
     model_cls = None
 
     def add_model_instance(self, **kwargs):

@@ -4,7 +4,10 @@ from django.test import TestCase
 from mock_api.forms import ApiResponseForm, ApiEndpointForm, ApiResponseRuleForm
 
 
-class BaseFormTest(object):
+# noinspection PyCallingNonCallable
+class BaseFormTest(TestCase):
+    form_cls = None
+    DATA = {}
 
     def data(self, **kwargs):
         form_data = {}
@@ -23,7 +26,7 @@ class BaseFormTest(object):
         self.assertTrue(form.is_valid())
 
 
-class ApiResponseFormTest(BaseFormTest, TestCase):
+class ApiResponseFormTest(BaseFormTest):
 
     DATA = {"name": "Default OK",
             "status_code": 200,
@@ -43,7 +46,7 @@ class ApiResponseFormTest(BaseFormTest, TestCase):
         self.assert_form_is_valid(self.data())
 
 
-class ApiEndpointFormTest(BaseFormTest, TestCase):
+class ApiEndpointFormTest(BaseFormTest):
 
     DATA = {"path": "/api/test",
             "method": "GET",
@@ -65,7 +68,7 @@ class ApiEndpointFormTest(BaseFormTest, TestCase):
         self.assert_form_is_valid(self.data())
 
 
-class ApiResponseRuleFormTest(BaseFormTest, TestCase):
+class ApiResponseRuleFormTest(BaseFormTest):
 
     DATA = {"name": "response rule name",
             "response": "1",

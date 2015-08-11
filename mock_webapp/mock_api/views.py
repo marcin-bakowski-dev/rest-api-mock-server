@@ -21,7 +21,7 @@ class MockApiView(APIView):
     response_resolver_class = ResponseResolver
     api_endpoint = None
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request):
         try:
             logger.debug("Processing request %s %s", request.method, request.path_info)
 
