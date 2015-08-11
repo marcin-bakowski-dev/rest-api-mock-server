@@ -1,6 +1,7 @@
 from django.conf.urls import url, patterns
 from django.contrib import admin
 from django.core.urlresolvers import reverse
+from django.http import Http404
 from django.shortcuts import redirect
 from django.contrib import messages
 
@@ -29,10 +30,10 @@ class ApiCallbackAdmin(admin.ModelAdmin):
 
 
 class AccessLogAdmin(admin.ModelAdmin):
-    list_display = ('request_time', 'user_agent', 'request_method', 'path', 'response_status_code')
-    readonly_fields = ('request_time', 'user_agent', 'request_method', 'path', 'request_headers',
+    list_display = ('request_time', 'api_endpoint', 'user_agent', 'request_method', 'path', 'response_status_code')
+    readonly_fields = ('request_time', 'api_endpoint', 'user_agent', 'request_method', 'path', 'request_headers',
                        'request_query_string', 'request_data', 'response_status_code', 'response_headers',
-                       'response_content', 'api_endpoint')
+                       'response_content')
 
     def has_add_permission(self, request):
         return False
@@ -45,10 +46,18 @@ class AccessLogAdmin(admin.ModelAdmin):
 
     def run_api_endpoint_callback(self, request, pk):
         access_log = self.get_object(request, pk)
+        if not access_log:
+            raise Http404("No access_log found")
+
         if access_log.api_endpoint:
-            callbacks.run_api_endpoint_callbacks(access_log.api_endpoint)
-            messages.add_message(request, messages.INFO,
-                                 'Api endpoint {} callbacks were run'.format(access_log.api_endpoint))
+            if access_log.api_endpoint.callbacks.exists():
+                callbacks.run_api_endpoint_callbacks(access_log.api_endpoint)
+                messages.add_message(request, messages.INFO,
+                                     'Api endpoint {} callbacks were run'.format(access_log.api_endpoint))
+            else:
+                messages.add_message(request, messages.INFO,
+                                     'No callbacks for api endpoint {}'.format(access_log.api_endpoint))
+
         return redirect(reverse("admin:mock_api_accesslog_change", args=(pk,)))
 
 

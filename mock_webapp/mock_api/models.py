@@ -60,7 +60,7 @@ class ApiEndpoint(models.Model):
 
 
 class AccessLog(models.Model):
-    request_time = models.TimeField(auto_now_add=True)
+    request_time = models.DateTimeField(auto_now_add=True)
     user_agent = models.CharField(max_length=254, blank=True, default="")
     path = models.CharField(max_length=254)
     request_method = models.CharField(max_length=10)

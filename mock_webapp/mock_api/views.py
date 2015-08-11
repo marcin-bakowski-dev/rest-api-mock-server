@@ -24,11 +24,15 @@ class MockApiView(APIView):
     def get(self, request, *args, **kwargs):
         try:
             logger.debug("Processing request %s %s", request.method, request.path_info)
+
             self.api_endpoint = ApiEndpoint.objects.get(path=request.path_info, method=request.method)
             logger.debug("Found api endpoint %s", self.api_endpoint)
+
             response = self.response_resolver_class(self.api_endpoint).resolve(request)
             logger.debug("Found response %s", response)
+
             callbacks.run_api_endpoint_callbacks(self.api_endpoint)
+
             return Response(status=response.status_code, data=response.get_content())
         except (ApiEndpoint.DoesNotExist, MatchingResponseNotFound):
             logger.error("No api endpoint found for %s %s", request.method, request.path_info)
@@ -36,10 +40,12 @@ class MockApiView(APIView):
 
     def finalize_response(self, request, response, *args, **kwargs):
         response = super(MockApiView, self).finalize_response(request, response, *args, **kwargs)
+
         access_log = log_request_and_response(request, response)
         if self.api_endpoint:
             access_log.api_endpoint = self.api_endpoint
             access_log.save()
+
         logger.debug("Access log entry was added: %s", access_log)
         return response
 
