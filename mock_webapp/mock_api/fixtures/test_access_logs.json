@@ -1,0 +1,53 @@
+[
+{
+    "fields": {
+        "request_data": "{}",
+        "request_time": "2015-08-11T07:17:43.567Z",
+        "response_headers": "{\"Content-Type\": \"text/html; charset=utf-8\", \"Status code\": 200, \"Vary\": \"Accept\", \"Allow\": \"GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS\"}",
+        "response_content": "{\"status\": \"OK\"}",
+        "request_headers": "{\"HTTP_ACCEPT\": \"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\", \"CONTENT_LENGTH\": \"\", \"HTTP_USER_AGENT\": \"Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:39.0) Gecko/20100101 Firefox/39.0\", \"HTTP_CONNECTION\": \"keep-alive\", \"HTTP_COOKIE\": \"csrftoken=NqvKkgkM7uCM1bsrtz3xhhXhGXgoaaj5; s_fid=33A7C47955DE5015-29421BE133C5EF44; s_cpmstack=%5B%5B%27Direct%27%2C%271437389367956%27%5D%5D; s_pers=%20s_lastvisit%3D1415344957810%7C1509952957810%3B%20gpv_pn%3Dno%2520value%7C1415346757811%3B; s_sv_112_p1=1@31@d/13749/12016/15166&s/15202&e/2; optimizelySegments=%7B%22242041888%22%3A%22false%22%2C%22242336416%22%3A%22direct%22%2C%22242551123%22%3A%22ff%22%2C%22242182899%22%3A%22none%22%2C%22785580170%22%3A%22true%22%7D; optimizelyEndUserId=oeu1415344965014r0.9112237604832842; optimizelyBuckets=%7B%7D; s_vnum=1439980317306%26vn%3D28; s_nr=1438954957698-Repeat; s_cc=true; s_ppv=93; s_prop14=1st visit; s_prop_14=Direct; s_sq=%5B%5BB%5D%5D; sessionid=xx0xg3t938t5si98pym0226mpgnwsfqv\", \"REMOTE_ADDR\": \"127.0.0.1\", \"HTTP_ACCEPT_LANGUAGE\": \"en-US,en;q=0.5\", \"HTTP_HOST\": \"127.0.0.1:8000\", \"CONTENT_TYPE\": \"text/plain\", \"HTTP_CACHE_CONTROL\": \"max-age=0\", \"REMOTE_HOST\": \"\", \"HTTP_ACCEPT_ENCODING\": \"gzip, deflate\"}",
+        "api_endpoint": 1,
+        "request_method": "GET",
+        "user_agent": "Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:39.0) Gecko/20100101 Firefox/39.0",
+        "response_status_code": 200,
+        "path": "/api/items/",
+        "request_query_string": "format=json"
+    },
+    "model": "mock_api.accesslog",
+    "pk": 1
+},
+{
+    "fields": {
+        "request_data": "{}",
+        "request_time": "2015-08-11T07:20:14.928Z",
+        "response_headers": "{\"Content-Type\": \"text/html; charset=utf-8\", \"Status code\": 200, \"Vary\": \"Accept\", \"Allow\": \"GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS\"}",
+        "response_content": "null",
+        "request_headers": "{\"HTTP_ACCEPT\": \"image/png,image/*;q=0.8,*/*;q=0.5\", \"CONTENT_LENGTH\": \"\", \"HTTP_USER_AGENT\": \"Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:39.0) Gecko/20100101 Firefox/39.0\", \"HTTP_CONNECTION\": \"keep-alive\", \"HTTP_COOKIE\": \"csrftoken=GC586cMVuFGZFfI6dseXN3ehIl4QzfCt; s_fid=33A7C47955DE5015-29421BE133C5EF44; s_cpmstack=%5B%5B%27Direct%27%2C%271437389367956%27%5D%5D; s_pers=%20s_lastvisit%3D1415344957810%7C1509952957810%3B%20gpv_pn%3Dno%2520value%7C1415346757811%3B; s_sv_112_p1=1@31@d/13749/12016/15166&s/15202&e/2; optimizelySegments=%7B%22242041888%22%3A%22false%22%2C%22242336416%22%3A%22direct%22%2C%22242551123%22%3A%22ff%22%2C%22242182899%22%3A%22none%22%2C%22785580170%22%3A%22true%22%7D; optimizelyEndUserId=oeu1415344965014r0.9112237604832842; optimizelyBuckets=%7B%7D; s_vnum=1439980317306%26vn%3D28; s_nr=1438954957698-Repeat; sessionid=484be0rrziabd4si83mw044xm6byqwtu; s_cc=true; s_ppv=93; s_prop14=1st visit; s_prop_14=Direct; s_sq=%5B%5BB%5D%5D\", \"REMOTE_ADDR\": \"127.0.0.1\", \"HTTP_ACCEPT_LANGUAGE\": \"en-US,en;q=0.5\", \"HTTP_HOST\": \"127.0.0.1:8000\", \"CONTENT_TYPE\": \"text/plain\", \"REMOTE_HOST\": \"\", \"HTTP_ACCEPT_ENCODING\": \"gzip, deflate\"}",
+        "api_endpoint": 2,
+        "request_method": "GET",
+        "user_agent": "Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:39.0) Gecko/20100101 Firefox/39.0",
+        "response_status_code": 200,
+        "path": "/favicon.ico",
+        "request_query_string": ""
+    },
+    "model": "mock_api.accesslog",
+    "pk": 2
+},
+{
+    "fields": {
+        "request_data": "{}",
+        "request_time": "2015-08-11T07:20:14.976Z",
+        "response_headers": "{\"Content-Type\": \"text/html; charset=utf-8\", \"Status code\": 501, \"Vary\": \"Accept\", \"Allow\": \"GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS\"}",
+        "response_content": "null",
+        "request_headers": "{\"HTTP_ACCEPT\": \"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\", \"CONTENT_LENGTH\": \"\", \"HTTP_USER_AGENT\": \"Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:39.0) Gecko/20100101 Firefox/39.0\", \"HTTP_CONNECTION\": \"keep-alive\", \"HTTP_COOKIE\": \"csrftoken=GC586cMVuFGZFfI6dseXN3ehIl4QzfCt; s_fid=33A7C47955DE5015-29421BE133C5EF44; s_cpmstack=%5B%5B%27Direct%27%2C%271437389367956%27%5D%5D; s_pers=%20s_lastvisit%3D1415344957810%7C1509952957810%3B%20gpv_pn%3Dno%2520value%7C1415346757811%3B; s_sv_112_p1=1@31@d/13749/12016/15166&s/15202&e/2; optimizelySegments=%7B%22242041888%22%3A%22false%22%2C%22242336416%22%3A%22direct%22%2C%22242551123%22%3A%22ff%22%2C%22242182899%22%3A%22none%22%2C%22785580170%22%3A%22true%22%7D; optimizelyEndUserId=oeu1415344965014r0.9112237604832842; optimizelyBuckets=%7B%7D; s_vnum=1439980317306%26vn%3D28; s_nr=1438954957698-Repeat; sessionid=484be0rrziabd4si83mw044xm6byqwtu; s_cc=true; s_ppv=93; s_prop14=1st visit; s_prop_14=Direct; s_sq=%5B%5BB%5D%5D\", \"REMOTE_ADDR\": \"127.0.0.1\", \"HTTP_ACCEPT_LANGUAGE\": \"en-US,en;q=0.5\", \"HTTP_HOST\": \"127.0.0.1:8000\", \"CONTENT_TYPE\": \"text/plain\", \"REMOTE_HOST\": \"\", \"HTTP_ACCEPT_ENCODING\": \"gzip, deflate\"}",
+        "api_endpoint": null,
+        "request_method": "GET",
+        "user_agent": "Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:39.0) Gecko/20100101 Firefox/39.0",
+        "response_status_code": 501,
+        "path": "/favicon.ico",
+        "request_query_string": ""
+    },
+    "model": "mock_api.accesslog",
+    "pk": 3
+}
+]

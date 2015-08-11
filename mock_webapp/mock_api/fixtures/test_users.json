@@ -1,0 +1,20 @@
+[
+  {
+    "fields": {
+      "username": "admin",
+      "first_name": "",
+      "last_name": "",
+      "is_active": true,
+      "is_superuser": true,
+      "is_staff": true,
+      "last_login": "2015-08-11T07:17:51.927Z",
+      "groups": [],
+      "user_permissions": [],
+      "password": "pbkdf2_sha256$20000$s7M77Pa08aaq$ok56xK5nJYBOS0aQDpzntNw7C3y3sBM6tA/83fvUwyA=",
+      "email": "admin@adnin.com",
+      "date_joined": "2015-08-11T07:17:27.015Z"
+    },
+    "model": "auth.user",
+    "pk": 1
+  }
+]
