@@ -1,8 +1,10 @@
 import json
 
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 
 
+@python_2_unicode_compatible
 class ApiResponse(models.Model):
     name = models.CharField(max_length=100)
     status_code = models.IntegerField()
@@ -10,13 +12,14 @@ class ApiResponse(models.Model):
 
     ordering = ('name', 'status_code')
 
-    def __unicode__(self):
+    def __str__(self):
         return u"ApiResponse: {}[{}]".format(self.name, self.status_code)
 
     def get_content(self):
         return _deserialize_or_none(self.content)
 
 
+@python_2_unicode_compatible
 class ApiResponseRule(models.Model):
     name = models.CharField(max_length=100)
     response = models.ForeignKey(ApiResponse)
@@ -24,10 +27,11 @@ class ApiResponseRule(models.Model):
     param_name = models.CharField(max_length=100, blank=True, default="")
     param_value = models.CharField(max_length=100, blank=True, default="")
 
-    def __unicode__(self):
+    def __str__(self):
         return u"ApiResponseRule: {}[{},{}]".format(self.rule, self.param_name, self.param_value)
 
 
+@python_2_unicode_compatible
 class ApiCallback(models.Model):
     name = models.CharField(max_length=50)
     url = models.URLField()
@@ -35,7 +39,7 @@ class ApiCallback(models.Model):
     params = models.TextField(blank=True, default="")
     headers = models.TextField(blank=True, default="")
 
-    def __unicode__(self):
+    def __str__(self):
         return u"ApiCallback: {}: {} {}".format(self.name, self.method, self.url)
 
     def get_params(self):
@@ -45,6 +49,7 @@ class ApiCallback(models.Model):
         return _deserialize_or_none(self.headers)
 
 
+@python_2_unicode_compatible
 class ApiEndpoint(models.Model):
     path = models.CharField(max_length=254)
     method = models.CharField(max_length=10)
@@ -55,10 +60,11 @@ class ApiEndpoint(models.Model):
     ordering = ('path', 'method')
     unique_together = (('path', 'method'),)
 
-    def __unicode__(self):
+    def __str__(self):
         return u"{}: {}".format(self.method, self.path)
 
 
+@python_2_unicode_compatible
 class AccessLog(models.Model):
     request_time = models.DateTimeField(auto_now_add=True)
     user_agent = models.CharField(max_length=254, blank=True, default="")
@@ -74,7 +80,7 @@ class AccessLog(models.Model):
 
     ordering = ('-request_time',)
 
-    def __unicode__(self):
+    def __str__(self):
         return u"[{}]: {} [{}] {}".format(self.request_time, self.request_method, self.response_status_code, self.path)
 
 
