@@ -1,0 +1,14 @@
+language: python
+python:
+  - 2.7
+  - 3.5
+
+install:
+  - pip install -r requirements.txt
+
+before_script:
+  - mkdir -p shippable/testresults
+
+script:
+  - cd mock_webapp && python manage.py test --with-xunit --xunit-file=../shippable/testresults/nosetests.xml
+

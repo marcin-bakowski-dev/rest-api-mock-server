@@ -134,3 +134,8 @@ DEFAULT_CALLBACK_REQUEST_TIMEOUT = 3
 
 CORS_ORIGIN_ALLOW_ALL = True
 
+INSTALLED_APPS += (
+            'django_nose',
+            )
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
