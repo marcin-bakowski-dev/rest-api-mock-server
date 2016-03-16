@@ -1,18 +1,19 @@
 language: python
+
 python:
   - 2.7
   - 3.5
 
-install:
-  - pip install -r requirements.txt
+build:
+  ci:
+    - pip install -r requirements.txt
+    - mkdir -p shippable/testresults shippable/codecoverage
+    - cd mock_webapp && python manage.py test --with-xunit --xunit-file=../shippable/testresults/nosetests.xml --noinput --with-coverage --cover-package=mock_api --cover-erase --cover-xml --cover-xml-file=../shippable/codecoverage/coverage.xml
 
-before_script:
-  - mkdir -p shippable/testresults
-
-script:
-  - cd mock_webapp && python manage.py test --with-xunit --xunit-file=../shippable/testresults/nosetests.xml --noinput --with-coverage --cover-package=mock_api --cover-erase --cover-xml --cover-xml-file=../shippable/codecoverage/coverage.xml
-
-
-notifications:
-  email: false
-
+integrations:
+  notifications:
+    - integrationName: email
+      type: email
+      on_success: never
+      on_failure: never
+      on_pull_request: never
