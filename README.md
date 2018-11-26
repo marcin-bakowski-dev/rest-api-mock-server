@@ -19,7 +19,7 @@ Install requirements using `pip`...
 
 Create database and admin user:
 
-    cd mock_webapp
+    cd mock_rest_app
     python manage.py migrate
     python manage.py createsuperuser
 
