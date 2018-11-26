@@ -7,8 +7,7 @@ build:
   ci:
     - pip install -r requirements.txt
     - mkdir -p shippable/testresults shippable/codecoverage
-    - cd mock_rest_app && coverage run --source='.' manage.py test -v2
-
+    - cd mock_rest_app && python manage.py test --settings=mock_server.shippable_settings --with-xunit --xunit-file=../shippable/testresults/nosetests.xml --noinput --with-coverage --cover-package=mock_api --cover-erase --cover-xml --cover-xml-file=../shippable/codecoverage/coverage.xml
 integrations:
   notifications:
     - integrationName: email

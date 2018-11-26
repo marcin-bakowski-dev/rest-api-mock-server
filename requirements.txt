@@ -3,3 +3,4 @@ djangorestframework>=3.9
 requests>=2.20
 coverage>=4.5
 flake8>=3.6
+django-nose>=1.4
