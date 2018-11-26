@@ -1,4 +1,4 @@
-# REST API mock ![Build status](https://img.shields.io/shippable/56c1ce381895ca4474740463.svg)
+# REST API mock [![Run Status](https://api.shippable.com/projects/5bfbd25919f76f0700cf5d13/badge?branch=master)]()
 
 # Overview
 
