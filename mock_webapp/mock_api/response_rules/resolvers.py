@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from mock_api.response_rules import response_rules_provider
 
 

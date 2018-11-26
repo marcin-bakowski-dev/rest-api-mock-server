@@ -1,7 +1,7 @@
-# -*- coding: utf-8 -*-
+from unittest.mock import patch
+
 from rest_framework import status
 from rest_framework.test import APITestCase
-from mock import patch
 
 from mock_api.models import ApiEndpoint
 

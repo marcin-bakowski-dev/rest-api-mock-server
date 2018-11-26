@@ -1,10 +1,10 @@
-# -*- coding: utf-8 -*-
 from django.test import TestCase
+from rest_framework.parsers import JSONParser
 from rest_framework.request import Request
 from rest_framework.test import APIRequestFactory
 
-from mock_api.response_rules import RequestParamExistsMatcher, RequestParamContainsValueMatcher, \
-    RequestParamNotContainsValueMatcher
+from mock_api.response_rules import (RequestParamExistsMatcher, RequestParamContainsValueMatcher,
+                                     RequestParamNotContainsValueMatcher)
 
 
 # noinspection PyCallingNonCallable
@@ -15,7 +15,7 @@ class AbstractRequestParamMatcher(TestCase):
     def assert_request_param_matcher(self, request_method, request_data, param_name, param_value, expected):
         matcher = self.matcher_cls(param_name, param_value)
         request_method_handler = getattr(self.factory, request_method.lower())
-        request = Request(request_method_handler('/api/', data=request_data))
+        request = Request(request_method_handler('/api/', data=request_data, format="json"), parsers=[JSONParser()])
 
         match = matcher.match(request)
 

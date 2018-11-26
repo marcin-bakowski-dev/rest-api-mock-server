@@ -1,8 +1,9 @@
-# -*- coding: utf-8 -*-
+from unittest.mock import patch, ANY
+
 from django.conf import settings
-from django.core.urlresolvers import reverse
 from django.test import TestCase
-from mock import patch, ANY
+from django.urls import reverse
+
 from mock_api.models import AccessLog
 
 

@@ -1,9 +1,7 @@
-from django.conf.urls import url, patterns
-from django.contrib import admin
-from django.core.urlresolvers import reverse
+from django.contrib import admin, messages
 from django.http import Http404
 from django.shortcuts import redirect
-from django.contrib import messages
+from django.urls import reverse, re_path
 
 from mock_api import callbacks
 from mock_api.forms import ApiResponseForm, ApiResponseRuleForm, ApiEndpointForm, ApiCallbackForm
@@ -39,10 +37,12 @@ class AccessLogAdmin(admin.ModelAdmin):
         return False
 
     def get_urls(self):
-        return patterns('',
-                        url(r'^(?P<pk>\d+)/run-api-endpoint-callbacks/$',
+        urls = super(AccessLogAdmin, self).get_urls()
+        urls.insert(0,
+                    re_path(r'^(?P<pk>\d+)/run-api-endpoint-callbacks/$',
                             self.admin_site.admin_view(self.run_api_endpoint_callback),
-                            name='run_api_endpoint_callback')) + super(AccessLogAdmin, self).get_urls()
+                            name='run_api_endpoint_callback'))
+        return urls
 
     def run_api_endpoint_callback(self, request, pk):
         access_log = self.get_object(request, pk)

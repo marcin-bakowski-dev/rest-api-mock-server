@@ -22,7 +22,7 @@ class ApiResponse(models.Model):
 @python_2_unicode_compatible
 class ApiResponseRule(models.Model):
     name = models.CharField(max_length=100)
-    response = models.ForeignKey(ApiResponse)
+    response = models.ForeignKey(ApiResponse, on_delete=models.CASCADE)
     rule = models.CharField(max_length=50)
     param_name = models.CharField(max_length=100, blank=True, default="")
     param_value = models.CharField(max_length=100, blank=True, default="")
@@ -53,7 +53,7 @@ class ApiCallback(models.Model):
 class ApiEndpoint(models.Model):
     path = models.CharField(max_length=254)
     method = models.CharField(max_length=10)
-    response = models.ForeignKey(ApiResponse)
+    response = models.ForeignKey(ApiResponse, on_delete=models.CASCADE)
     response_rules = models.ManyToManyField(ApiResponseRule, blank=True)
     callbacks = models.ManyToManyField(ApiCallback, blank=True)
 
@@ -76,7 +76,7 @@ class AccessLog(models.Model):
     response_status_code = models.IntegerField()
     response_headers = models.TextField(blank=True, default="")
     response_content = models.TextField(blank=True, default="")
-    api_endpoint = models.ForeignKey(ApiEndpoint, blank=True, null=True)
+    api_endpoint = models.ForeignKey(ApiEndpoint, on_delete=models.CASCADE, blank=True, null=True)
 
     ordering = ('-request_time',)
 

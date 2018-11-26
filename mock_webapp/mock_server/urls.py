@@ -13,10 +13,11 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
-from django.conf.urls import include, url
+from django.conf.urls import include
 from django.contrib import admin
+from django.urls import path, re_path
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^.*$', include('mock_api.urls', namespace='url'))
+    path(r'admin/', admin.site.urls),
+    re_path(r'^.*', include('mock_api.urls'))
 ]

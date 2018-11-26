@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from mock_api.response_rules.errors import InvalidResponseRuleMatcher, MatchingResponseRuleNotFound
 from mock_api.response_rules.rule_matchers import BaseRuleMatcher
 

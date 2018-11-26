@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from django.test import TestCase
 
 from mock_api.response_rules import ResponseRuleProvider, RequestParamExistsMatcher

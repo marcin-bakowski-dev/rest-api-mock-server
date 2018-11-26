@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-
-
 class BaseRuleMatcher(object):
 
     def __init__(self, param_name, param_value):

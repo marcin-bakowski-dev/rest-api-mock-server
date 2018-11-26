@@ -38,21 +38,18 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'corsheaders',
     'mock_api'
 )
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-)
+]
 
 ROOT_URLCONF = 'mock_server.urls'
 
@@ -133,9 +130,3 @@ LOGGING = {
 DEFAULT_CALLBACK_REQUEST_TIMEOUT = 3
 
 CORS_ORIGIN_ALLOW_ALL = True
-
-INSTALLED_APPS += (
-            'django_nose',
-            )
-
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'

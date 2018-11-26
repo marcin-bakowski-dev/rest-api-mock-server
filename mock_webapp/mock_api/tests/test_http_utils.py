@@ -1,9 +1,10 @@
-# -*- coding: utf-8 -*-
 import json
+from unittest.mock import patch
+
 from django.conf import settings
 
 from django.test import TestCase
-from mock import patch
+from rest_framework.parsers import JSONParser
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.test import APIRequestFactory
@@ -68,7 +69,9 @@ class HttpUtilsTest(TestCase):
 
     def test_access_log_request_response(self):
         http_user_agent = "DJANGO TEST CLIENT"
-        request = Request(self.factory.post('/api/?test_qs', data={"ABC": "ABC"}, HTTP_USER_AGENT=http_user_agent))
+        request = Request(self.factory.post('/api/?test_qs', data={"ABC": "ABC"}, format="json",
+                                            HTTP_USER_AGENT=http_user_agent),
+                          parsers=[JSONParser()])
         response = Response(status=200, data={"status": "API_LOG_OK"}, headers={"X-TEST": "Test"})
 
         access_log = log_request_and_response(request, response)

@@ -6,12 +6,10 @@ REST API mock server is simple webapp based on Django framework. Django admin in
 
 # Requirements
 
-* Python (2.7, 3.4)
-* Django (1.8)
-* Django REST framework (3.2)
-* Django CORS headers (1.1)
-* Requests (2.7)
-* Mock (1.3)
+* Python (3.6+)
+* Django (2.1+)
+* Django REST framework (3.9+)
+* Requests (2.20+)
 
 # Installation
 
@@ -22,7 +20,8 @@ Install requirements using `pip`...
 Create database and admin user:
 
     cd mock_webapp
-    python manage.py syncdb
+    python manage.py migrate
+    python manage.py createsuperuser
 
 Start server:
 
@@ -165,6 +164,11 @@ But when test=not_found is used in query params, response for 'generic 404' rule
 
 Response rules can be easily extended by providing new rule matcher classes.
 
+# Run tests
+
+    python manage.py test -v2
+    coverage run --source='.' manage.py test
+    coverage report
 
 # TODO
 

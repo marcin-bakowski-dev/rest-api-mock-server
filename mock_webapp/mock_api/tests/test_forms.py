@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from django.test import TestCase
 
 from mock_api.forms import ApiResponseForm, ApiEndpointForm, ApiResponseRuleForm
